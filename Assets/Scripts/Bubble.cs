@@ -5,10 +5,12 @@ using UnityEngine;
 public class Bubble : MonoBehaviour
 {
     [SerializeField] private float speed;
+    private Animator anim;
 
     private void Start()
     {
-        Destroy(this.gameObject, 4.0f);
+        anim = GetComponent<Animator>();
+        Invoke("Pop", 4.0f);
     }
 
     private void FixedUpdate()
@@ -16,24 +18,13 @@ public class Bubble : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y + speed, transform.position.z);
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    Debug.Log("Hit");
-    //    //make player move with bubble
-    //    if (other.gameObject.tag == "Player")
-    //    {
-    //        other.gameObject.transform.parent = this.transform;
-    //        //other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-    //    }
-    //}
-    //private void OnTriggerExit2D(Collider2D other)
-    //{
-    //    Debug.Log("Hit");
-    //    //make player move with bubble
-    //    if (other.gameObject.tag == "Player")
-    //    {
-    //        other.gameObject.transform.parent = null;
-    //        //other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-    //    }
-    //}
+    public void Pop()
+    {
+        anim.Play("BubblePop");
+    }
+
+    private void Destroy()
+    {
+        Destroy(this.gameObject);
+    }
 }
