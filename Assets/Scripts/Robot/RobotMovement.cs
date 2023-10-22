@@ -7,6 +7,7 @@ public class RobotMovement : MonoBehaviour
     [SerializeField] private float speed;
     private Rigidbody2D body;
     Vector3 startScale;
+    [SerializeField] GameObject pauseMenu;
 
 
     private void Awake()
@@ -25,5 +26,12 @@ public class RobotMovement : MonoBehaviour
             transform.localScale = startScale;
         else if (horizontalInput < -0.01f)
             transform.localScale = new Vector3(startScale.x * -1, startScale.y, startScale.z);
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0;
+            //open pause menu
+            pauseMenu.SetActive(true);
+        }
     }
 }
